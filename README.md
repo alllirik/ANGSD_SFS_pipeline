@@ -64,7 +64,7 @@ Second command estimates SFS by optimizing .saf file.
 Feel free to adjust filtering or exclude it at all.
 Both files are generated in Results directory.
 
-### Visualisation of SFS in R
+### Visualization of SFS in R
 
 The SFS is obtained by counting the number of derived SNPs.
 Final histogramm shows the distribution of the allele frequencies of SNPs.
