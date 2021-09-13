@@ -8,22 +8,22 @@ This pipeline was created to demonstrate the differences in the calculation of S
 ### Preparation
 
 Firstly, create directories where you will be working:
-'''
+```
 mkdir SFS
 cd SFS
 mkdir bams
 mkdir Results
-'''
+```
 
 Intsall SAMtools: http://www.htslib.org/download/
 Install ANGSD: http://www.popgen.dk/angsd/index.php/ANGSD
 Check http://www.popgen.dk/angsd/index.php/Quick_Start for quick start and data examples.
 
 Secondly, set paths for all software if needed:
-'''
+```
 ANGSD=~/Software/angsd
 SAMTOOLS=~/Software/samtools-1.12/samtools
-'''
+```
 
 Input data are BAM files that are aligned to the reference, indexed and sorted. 
 
@@ -31,13 +31,13 @@ You will also need a reference genome and ancestral states. The latter (for hg19
 
 The ancestral state needs to be supplied for the full SFS, but you can use the -fold 1 to estimate the folded SFS and then use the reference as ancestral.
 
-'''
+```
 #For indexing fasta file run:
 samtools faidx name.fa
 
 #For indexing BAM file run:
 samtools index name.bam
-'''
+```
 
 Insert path for the directory with bams into BAM_PATH. 
 Insert path to the reference and ancestral states into ANC and REF.
@@ -46,14 +46,14 @@ Insert path to the reference and ancestral states into ANC and REF.
 
 The coverage of data is artificially lowered (downsampled) with the help of SAMtools, which randomly tosses out some of the reads, leaving a subset of them, while always keeping the paired reads. 
 
-'''
+```
 samtools view -bs 42.$FRAC $BAM > $COV.$BAM;
-'''
+```
 
 In this pipeline the seed of the random value generator is 42.
 Insert the coverage value (which is used for file names) in COV.
 Insert the fraction of original BAM-file which will not be tossed out in FRAC.
-So, samtools view -bs 42.06 in.bam > subsampled.bam will subsample 6 percent of mapped reads with 42 as the seed for the random number generator.
+So, samtools view -bs 42.06 input.bam > subsampled.bam will subsample 6 percent of mapped reads with 42 as the seed for the random number generator.
 
 ### Site Frequency Spectrum
 
@@ -70,7 +70,7 @@ The SFS is obtained by counting the number of derived SNPs.
 Final histogramm shows the distribution of the allele frequencies of SNPs.
 After generating .sfs file, you can compare different GL models in one histogramm by using this simple R code:
 
-'''
+```
 nnorm <- function(x) x/sum(x)
 res <- rbind(
   GL1=scan("path/to/file/filename.GL1.2X.sfs")[-1],
@@ -88,4 +88,4 @@ legend("topright",
        legend = c("SAMtools", "GATK", "SYK"), 
        cex = 0.35)
 
-'''
+```
