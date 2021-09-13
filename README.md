@@ -68,7 +68,7 @@ Both files are generated in Results directory.
 
 The SFS is obtained by counting the number of derived SNPs.
 Final histogramm shows the distribution of the allele frequencies of SNPs.
-After generating .sfs file, you can compare different GL models in one histogramm by using this simple R code:
+After generating .sfs file, you can compare different GL models in one barplot by using this simple R code that can be found in sfs_barplot.R:
 
 ```
 nnorm <- function(x) x/sum(x)
