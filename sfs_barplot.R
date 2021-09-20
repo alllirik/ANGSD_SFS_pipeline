@@ -1,4 +1,8 @@
-for(i in seq(2, 4, by=2))
+args <- commandArgs(trailingOnly = TRUE)
+bam_count=as.numeric(args[[1]])
+model_count=as.numeric(args[[2]])
+cov=args[-(1:2)]
+for(i in cov)
 {
   print(i)
   nnorm <- function(x) x/sum(x)
@@ -17,7 +21,8 @@ for(i in seq(2, 4, by=2))
       height = 4) # The height of the plot in inches
   
   #plot the none ancestral sites
-  barplot(res,beside=T,main="Folded SFS", names=1:20, col=c("lightblue","blue"))
+  name_count=bam_count*model_count
+  barplot(res,beside=T,main="Site Frequency Spectrum", names=1:name_count, col=c("lightblue","blue"))
   legend("topright", 
          fill = c("lightblue","blue"),
          legend = c("SAMtools", "GATK"), 
