@@ -2,7 +2,7 @@ ANC=human_g1k_v37.fasta
 REF=human_g1k_v37.fasta
 BAM_PATH=bams
 MEAN_COV=8
-COV_ARRAY=(4 2)
+COV_ARRAY=(4 3)
 MODEL_ARRAY=(1 2)
 
 for COV in ${COV_ARRAY[*]}
@@ -20,5 +20,8 @@ do
 		realSFS -maxIter 100 -P 4 ${COV}X/GL${MODEL}.${COV}X.saf.idx > ${COV}X/GL${MODEL}.${COV}X.sfs
 	done
 done
-Rscript sfs_barplot.R
-
+bam_count=$(ls $BAM_PATH/*.bam | wc -l)
+length=${#MODEL_ARRAY[@]}
+echo $bam_count
+echo $length
+Rscript sfs_barplot.R $bam_count $length ${COV_ARRAY[*]}
