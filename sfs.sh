@@ -26,8 +26,11 @@ do
         do
                 samtools view -bs 42$FRAC $BAM > ${COV}X/${COV}X."${BAM##*/}"
         done
-        ls ${COV}X/*.bam > ${COV}X.filelist                                                                                                                                                          for MODEL in ${MODEL_ARRAY[*]}                                                                                                                                                               do                                                                                                                                                                                                   angsd -b ${COV}X.filelist -anc $ANC -ref $REF -doCounts 1 -baq 1 -C 50 -minMapQ 30 -minQ 20 -minInd 2 -P 2 -GL $MODEL -doSaf 1 -out ${COV}X/GL${MODEL}.${COV}X
-                realSFS -maxIter 100 -P 4 ${COV}X/GL${MODEL}.${COV}X.saf.idx > ${COV}X/GL${MODEL}.${COV}X.sfs
+        ls ${COV}X/*.bam > ${COV}X.filelist
+        for MODEL in ${MODEL_ARRAY[*]}
+        do
+        angsd -b ${COV}X.filelist -anc $ANC -ref $REF -doCounts 1 -baq 1 -C 50 -minMapQ 30 -minQ 20 -minInd 2 -P 2 -GL $MODEL -doSaf 1 -out ${COV}X/GL${MODEL}.${COV}X
+        realSFS -maxIter 100 -P 4 ${COV}X/GL${MODEL}.${COV}X.saf.idx > ${COV}X/GL${MODEL}.${COV}X.sfs
         done
 done
 bam_count=$(ls $BAM_PATH/*.bam | wc -l)
